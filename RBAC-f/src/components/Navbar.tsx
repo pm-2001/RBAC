@@ -24,7 +24,21 @@ const Navbar: React.FC = () => {
             fontFamily: 'Roboto, sans-serif',
           }}
         >
+          <Button
+            href="/"
+            sx={{
+              color: '#fff',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+              textTransform: 'none',
+              '&:hover': {
+                color: '#ffdd57',
+                background: 'rgba(255, 221, 87, 0.2)',
+              },
+            }}
+          >
           RBAC Dashboard
+          </Button>
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
