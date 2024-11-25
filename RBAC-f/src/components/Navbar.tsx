@@ -13,7 +13,6 @@ const Navbar: React.FC = () => {
       }}
     >
       <Toolbar>
-        {/* Title */}
         <Typography
           variant="h5"
           sx={{
@@ -27,7 +26,6 @@ const Navbar: React.FC = () => {
         >
           RBAC Dashboard
         </Typography>
-        {/* Buttons */}
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
             href="/users"
