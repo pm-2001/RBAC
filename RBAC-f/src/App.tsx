@@ -1,3 +1,7 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Dashboard';
 import UsersPage from './pages/Users';
 import RolesPage from './pages/Roles';
@@ -6,7 +10,9 @@ import PermissionsPage from './pages/Permission';
 
 const App: React.FC = () => {
   return (
-@@ -15,7 +16,8 @@ const App: React.FC = () => {
+    <Router>
+      <Navbar />
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/roles" element={<RolesPage />} />
@@ -15,3 +21,7 @@ const App: React.FC = () => {
       </Routes>
       <Footer />
     </Router>
+  );
+};
+
+export default App;
