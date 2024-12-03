@@ -11,8 +11,6 @@ config.set_main_option(
     f"postgresql+psycopg2://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}",
 )
 
-# this is the Alembic Config object, which provides
-# access to the values within the .ini file in use.
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
