@@ -122,7 +122,7 @@ const RoleTable: React.FC = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
+            {/* Remove the ID column header */}
             <TableCell>Role Name</TableCell>
             <TableCell>Permissions</TableCell>
             <TableCell>Actions</TableCell>
@@ -131,8 +131,8 @@ const RoleTable: React.FC = () => {
         <TableBody>
           {roles.length > 0 ? (
             roles.map((role) => (
-              <TableRow key={role.id}> 
-                <TableCell>{role.id}</TableCell>
+              <TableRow key={role.id}>
+                {/* Remove the ID column data */}
                 <TableCell>{role.name}</TableCell>
                 <TableCell>
                   {parsePermissions(role.permissions).join(', ') || 'No Permissions'}
@@ -160,7 +160,7 @@ const RoleTable: React.FC = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4} align="center">
+              <TableCell colSpan={3} align="center">
                 No roles found.
               </TableCell>
             </TableRow>
@@ -179,7 +179,6 @@ const RoleTable: React.FC = () => {
         </Alert>
       </Snackbar>
 
-      
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Edit Role</DialogTitle>
         <DialogContent>

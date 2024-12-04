@@ -13,8 +13,9 @@ const RolesPage: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        overflow: 'hidden', // Prevent page scrolling
+        overflowX: 'hidden', // Prevent page scrolling horizontally
         padding: '2rem',
+        boxSizing: 'border-box', // Ensure padding doesn't affect width
       }}
     >
       <Container
@@ -27,6 +28,9 @@ const RolesPage: React.FC = () => {
           backgroundColor: '#ffffff', // White container background
           borderRadius: '12px',
           boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', // Soft shadow
+          width: '100%',
+          boxSizing: 'border-box',
+          overflowX: 'hidden', // Prevent horizontal overflow
         }}
       >
         <Typography
@@ -49,8 +53,10 @@ const RolesPage: React.FC = () => {
             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
             padding: '2rem',
             mb: 5,
-            overflow: 'auto',
-            maxHeight: 'calc(100vh - 15rem)',
+            overflowY: 'auto', // Allow vertical scrolling if content overflows
+            maxHeight: 'calc(100vh - 20rem)', // Adjust max height so it doesn't overflow
+            width: '100%', // Ensure full width of the container
+            boxSizing: 'border-box',
           }}
         >
           <Typography
@@ -72,8 +78,10 @@ const RolesPage: React.FC = () => {
             borderRadius: '12px',
             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
             padding: '2rem',
-            overflow: 'auto',
-            maxHeight: 'calc(100vh - 15rem)', 
+            overflowY: 'auto', // Allow vertical scrolling if content overflows
+            maxHeight: 'calc(100vh - 20rem)', 
+            width: '100%', // Ensure full width of the container
+            boxSizing: 'border-box',
           }}
         >
           <Typography

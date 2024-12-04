@@ -7,13 +7,14 @@ const UsersPage: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#f4f6f8', 
-        minHeight: '100vh', 
-        minWidth: '100vw', 
+        backgroundColor: '#f4f6f8',
+        minHeight: '100vh',
+        minWidth: '100vw',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        overflow: 'hidden', 
+        overflowX: 'hidden', // Prevent horizontal scrolling on the entire page
+        boxSizing: 'border-box', // Ensure padding and border are within the element's width
       }}
     >
       <Container
@@ -25,6 +26,9 @@ const UsersPage: React.FC = () => {
           flexDirection: 'column',
           gap: '2rem',
           flexGrow: 1,
+          width: '100%',
+          overflowX: 'hidden', // Prevent overflow in container
+          boxSizing: 'border-box',
         }}
       >
         <Typography
@@ -50,15 +54,17 @@ const UsersPage: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            overflow: 'auto', 
+            overflow: 'hidden', // Hide any overflow
             maxHeight: 'calc(100vh - 15rem)',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         >
           <Typography
             variant="h6"
             sx={{
               fontWeight: '600',
-              color: '#34495e', 
+              color: '#34495e',
               mb: 2,
             }}
           >
@@ -67,7 +73,6 @@ const UsersPage: React.FC = () => {
           <UserForm />
         </Box>
 
-  
         <Box
           sx={{
             backgroundColor: '#ffffff',
@@ -78,8 +83,10 @@ const UsersPage: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            overflow: 'auto',
+            overflow: 'hidden', // Hide any overflow
             maxHeight: 'calc(100vh - 15rem)',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         >
           <Typography
