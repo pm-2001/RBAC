@@ -15,5 +15,5 @@ class Role(Base):
     __tablename__ = 'roles'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
-    permissions = Column(String)  # Store permissions as a comma-separated string
+    permissions = Column(String) 
     users = relationship("User", back_populates="role")

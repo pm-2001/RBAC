@@ -7,7 +7,7 @@ interface User {
   username: string;
   email: string;
   status: boolean;
-  role: string; // Added role property
+  role: string;
 }
 
 const UserTable: React.FC = () => {

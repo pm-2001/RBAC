@@ -14,7 +14,7 @@ const Home: React.FC = () => {
         color: '#333',
       }}
     >
-      {/* Outer Box with Glass Effect */}
+
       <Box
         sx={{
           position: 'relative',
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
           backdropFilter: 'blur(8px)',
         }}
       >
-        {/* Inner Content */}
+      
         <Container
           sx={{
             position: 'absolute',
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             padding: 4,
           }}
         >
-          {/* Title */}
+          
           <Typography
             variant="h3"
             sx={{
@@ -53,7 +53,7 @@ const Home: React.FC = () => {
             Welcome
           </Typography>
 
-          {/* Subtitle */}
+         
           <Typography
             variant="h5"
             sx={{
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
             Simplify user, role, and permission management. Experience intuitive workflows and seamless control.
           </Typography>
 
-          {/* Action Button */}
+         
           <Button
             variant="contained"
             size="large"

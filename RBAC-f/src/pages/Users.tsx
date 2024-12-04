@@ -7,13 +7,13 @@ const UsersPage: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#f4f6f8', // Match dashboard theme
-        minHeight: '100vh', // Full viewport height
-        minWidth: '100vw', // Full viewport width
+        backgroundColor: '#f4f6f8', 
+        minHeight: '100vh', 
+        minWidth: '100vw', 
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        overflow: 'hidden', // Prevent overall page scrolling
+        overflow: 'hidden', 
       }}
     >
       <Container
@@ -32,7 +32,7 @@ const UsersPage: React.FC = () => {
           sx={{
             fontWeight: 'bold',
             textAlign: 'center',
-            color: '#2c3e50', // Dashboard-like color
+            color: '#2c3e50',
             mb: 2,
             letterSpacing: '0.05em',
           }}
@@ -40,7 +40,6 @@ const UsersPage: React.FC = () => {
           Manage Users
         </Typography>
 
-        {/* User Form Section */}
         <Box
           sx={{
             backgroundColor: '#ffffff',
@@ -51,15 +50,15 @@ const UsersPage: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            overflow: 'auto', // Scrollable within the container
-            maxHeight: 'calc(100vh - 15rem)', // Prevent overflow
+            overflow: 'auto', 
+            maxHeight: 'calc(100vh - 15rem)',
           }}
         >
           <Typography
             variant="h6"
             sx={{
               fontWeight: '600',
-              color: '#34495e', // Matching color theme
+              color: '#34495e', 
               mb: 2,
             }}
           >
@@ -68,7 +67,7 @@ const UsersPage: React.FC = () => {
           <UserForm />
         </Box>
 
-        {/* User Table Section */}
+  
         <Box
           sx={{
             backgroundColor: '#ffffff',
@@ -80,7 +79,7 @@ const UsersPage: React.FC = () => {
             flexDirection: 'column',
             justifyContent: 'space-between',
             overflow: 'auto',
-            maxHeight: 'calc(100vh - 15rem)', // Prevent overflow
+            maxHeight: 'calc(100vh - 15rem)',
           }}
         >
           <Typography

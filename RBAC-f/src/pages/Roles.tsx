@@ -44,19 +44,19 @@ const RolesPage: React.FC = () => {
 
         <Box
           sx={{
-            backgroundColor: '#f4f6f8', // Slightly darker card background
+            backgroundColor: '#f4f6f8',
             borderRadius: '12px',
-            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Subtle shadow for the card
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
             padding: '2rem',
             mb: 5,
             overflow: 'auto',
-            maxHeight: 'calc(100vh - 15rem)', // Prevent overflow
+            maxHeight: 'calc(100vh - 15rem)',
           }}
         >
           <Typography
             variant="h6"
             sx={{
-              color: '#2d3748', // Subtle dark text color
+              color: '#2d3748', 
               fontWeight: '600',
               marginBottom: '1.5rem',
             }}
@@ -68,18 +68,18 @@ const RolesPage: React.FC = () => {
 
         <Box
           sx={{
-            backgroundColor: '#f4f6f8', // Slightly darker card background
+            backgroundColor: '#f4f6f8', 
             borderRadius: '12px',
-            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Subtle shadow for the card
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
             padding: '2rem',
             overflow: 'auto',
-            maxHeight: 'calc(100vh - 15rem)', // Prevent overflow
+            maxHeight: 'calc(100vh - 15rem)', 
           }}
         >
           <Typography
             variant="h6"
             sx={{
-              color: '#2d3748', // Subtle dark text color
+              color: '#2d3748', 
               fontWeight: '600',
               marginBottom: '1.5rem',
             }}

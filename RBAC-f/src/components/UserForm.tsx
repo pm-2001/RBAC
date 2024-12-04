@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box, Snackbar, Alert } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box, Snackbar, Alert, CircularProgress } from '@mui/material';
 import axios from 'axios';
 
 const UserForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
+  const [roles, setRoles] = useState<string[]>([]); 
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [loadingRoles, setLoadingRoles] = useState(true); 
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/role/');
+        setRoles(response.data.map((role: any) => role.name)); 
+        setLoadingRoles(false);
+      } catch (error) {
+        setErrorMessage('Failed to load roles.');
+        setSnackbarOpen(true);
+        setLoadingRoles(false);
+      }
+    };
+
+    fetchRoles();
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -19,7 +37,6 @@ const UserForm: React.FC = () => {
       });
       setSuccessMessage(response.data.message || 'User has been added successfully!');
       setSnackbarOpen(true);
-      // Clear form fields after successful submission
       setUsername('');
       setEmail('');
       setRole('');
@@ -68,18 +85,24 @@ const UserForm: React.FC = () => {
       />
       <FormControl fullWidth>
         <InputLabel>Role</InputLabel>
-        <Select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          sx={{
-            backgroundColor: '#f9f9f9',
-            borderRadius: '8px',
-          }}
-        >
-          <MenuItem value="admin">Admin</MenuItem>
-          <MenuItem value="editor">Editor</MenuItem>
-          <MenuItem value="viewer">Viewer</MenuItem>
-        </Select>
+        {loadingRoles ? (
+          <CircularProgress size={24} />
+        ) : (
+          <Select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            sx={{
+              backgroundColor: '#f9f9f9',
+              borderRadius: '8px',
+            }}
+          >
+            {roles.map((roleName) => (
+              <MenuItem key={roleName} value={roleName}>
+                {roleName}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
       </FormControl>
 
       <Button
@@ -94,11 +117,11 @@ const UserForm: React.FC = () => {
             backgroundColor: '#4a90e2',
           },
         }}
+        disabled={loadingRoles}
       >
         Submit
       </Button>
 
-      {/* Snackbar for success and error messages */}
       <Snackbar
         open={isSnackbarOpen}
         autoHideDuration={6000}
