@@ -19,6 +19,7 @@ const RoleForm: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
+      console.log(permissions)
       const response = await axios.post('http://127.0.0.1:8000/role/', {
         name: roleName,
         permissions,

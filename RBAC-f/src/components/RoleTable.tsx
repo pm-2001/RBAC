@@ -15,17 +15,17 @@ import {
   DialogTitle,
   FormControlLabel,
   Checkbox,
+  FormGroup,
+  Typography,
 } from '@mui/material';
 import axios from 'axios';
 
-// Interface for Role
 interface Role {
   id: number;
   name: string;
   permissions: string;
 }
 
-// Function to parse the permissions string into an array
 const parsePermissions = (permissions: string): string[] => {
   if (!permissions || permissions === '{}') return [];
   return permissions.replace(/[{}]/g, '').split(',').map((perm) => perm.trim());
@@ -36,19 +36,11 @@ const RoleTable: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
-  // For editing role
   const [openDialog, setOpenDialog] = useState(false);
   const [editRole, setEditRole] = useState<Role | null>(null);
+  const [roleName, setRoleName] = useState('');
+  const [permissions, setPermissions] = useState<string[]>([]);
 
-  // Permissions as a state
-  const [permissions, setPermissions] = useState({
-    create: false,
-    read: false,
-    update: false,
-    delete: false,
-  });
-
-  // Fetch roles from the API
   const fetchRoles = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:8000/role/');
@@ -59,39 +51,38 @@ const RoleTable: React.FC = () => {
     }
   };
 
-  // Edit role handler
   const handleEditClick = (role: Role) => {
-    console.log(role)
-    setEditRole(role); // Set the role to edit
-    const rolePermissions = parsePermissions(role.permissions);
-    setPermissions({
-      create: rolePermissions.includes('create'),
-      read: rolePermissions.includes('read'),
-      update: rolePermissions.includes('update'),
-      delete: rolePermissions.includes('delete'),
-    });
-    setOpenDialog(true); // Open the edit dialog
+    setEditRole(role); 
+    setRoleName(role.name); 
+    setPermissions(parsePermissions(role.permissions));
+    setOpenDialog(true); 
   };
 
   const handleCloseDialog = () => {
-    setOpenDialog(false); // Close the dialog
+    setOpenDialog(false); 
+  };
+
+  const handlePermissionChange = (permission: string) => {
+    setPermissions((prevPermissions) =>
+      prevPermissions.includes(permission)
+        ? prevPermissions.filter((p) => p !== permission)
+        : [...prevPermissions, permission]
+    );
   };
 
   const handleSaveChanges = async () => {
     if (editRole) {
-      // Generate the permissions string in the expected format (e.g., '{create, read, update}')
-      const selectedPermissions = Object.keys(permissions)
-        .filter((perm) => permissions[perm as keyof typeof permissions])
-        .join(', '); // Join them as a comma-separated string
-  
       try {
-        console.log(permissions)
+
         const response = await axios.put(`http://127.0.0.1:8000/role/${editRole.id}`, {
-          name: editRole.name, // Keep role name fixed
-          permissions: `{${selectedPermissions}}`, // Format permissions as a string like '{create, read, update}'
+          name: roleName, 
+          permissions, 
         });
-        setRoles(roles.map((role) => (role.id === editRole.id ? response.data : role)));
-        setOpenDialog(false); // Close the dialog after saving
+
+        setRoles((prevRoles) =>
+          prevRoles.map((role) => (role.id === editRole.id ? { ...role, name: roleName, permissions: permissions.join(', ') } : role))
+        );
+        setOpenDialog(false); 
       } catch (error: any) {
         setErrorMessage(error.response?.data?.detail || 'Failed to update role.');
         setSnackbarOpen(true);
@@ -99,34 +90,22 @@ const RoleTable: React.FC = () => {
     }
   };
 
-  // Delete role handler
   const handleDeleteClick = async (id: number) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/role/${id}`);
-      setRoles(roles.filter((role) => role.id !== id)); 
+      setRoles((prevRoles) => prevRoles.filter((role) => role.id !== id));
     } catch (error: any) {
       setErrorMessage(error.response?.data?.detail || 'Failed to delete role.');
       setSnackbarOpen(true);
     }
   };
 
-  // Fetch roles when the component is mounted
   useEffect(() => {
     fetchRoles();
   }, []);
 
-  // Close Snackbar
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
-  };
-
-  // Handle checkbox changes
-  const handlePermissionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setPermissions((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
   };
 
   return (
@@ -152,11 +131,10 @@ const RoleTable: React.FC = () => {
         <TableBody>
           {roles.length > 0 ? (
             roles.map((role) => (
-              <TableRow key={role.id}>
+              <TableRow key={role.id}> 
                 <TableCell>{role.id}</TableCell>
                 <TableCell>{role.name}</TableCell>
                 <TableCell>
-                  {/* Display permissions as a comma-separated list */}
                   {parsePermissions(role.permissions).join(', ') || 'No Permissions'}
                 </TableCell>
                 <TableCell>
@@ -164,7 +142,7 @@ const RoleTable: React.FC = () => {
                     variant="outlined"
                     color="primary"
                     size="small"
-                    onClick={() => handleEditClick(role)}  // Trigger edit on click
+                    onClick={() => handleEditClick(role)} 
                   >
                     Edit
                   </Button>
@@ -173,7 +151,7 @@ const RoleTable: React.FC = () => {
                     color="secondary"
                     size="small"
                     sx={{ marginLeft: 1 }}
-                    onClick={() => handleDeleteClick(role.id)} // Trigger delete on click
+                    onClick={() => handleDeleteClick(role.id)} 
                   >
                     Delete
                   </Button>
@@ -190,7 +168,6 @@ const RoleTable: React.FC = () => {
         </TableBody>
       </Table>
 
-      {/* Snackbar for error messages */}
       <Snackbar
         open={isSnackbarOpen}
         autoHideDuration={6000}
@@ -202,54 +179,30 @@ const RoleTable: React.FC = () => {
         </Alert>
       </Snackbar>
 
-      {/* Dialog to edit role */}
+      
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Edit Role</DialogTitle>
         <DialogContent>
-          {editRole && (
-            <>
+          <Typography variant="h6" component="div" sx={{ marginBottom: 2 }}>
+            {roleName} 
+          </Typography>
+          <FormGroup sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+            {['create', 'read', 'update', 'delete'].map((permission) => (
               <FormControlLabel
+                key={permission} 
                 control={
                   <Checkbox
-                    checked={permissions.create}
-                    onChange={handlePermissionChange}
-                    name="create"
+                    checked={permissions.includes(permission)}
+                    onChange={() => handlePermissionChange(permission)}
                   />
                 }
-                label="Create"
+                label={permission.charAt(0).toUpperCase() + permission.slice(1)}
+                sx={{
+                  color: '#4a90e2',
+                }}
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={permissions.read}
-                    onChange={handlePermissionChange}
-                    name="read"
-                  />
-                }
-                label="Read"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={permissions.update}
-                    onChange={handlePermissionChange}
-                    name="update"
-                  />
-                }
-                label="Update"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={permissions.delete}
-                    onChange={handlePermissionChange}
-                    name="delete"
-                  />
-                }
-                label="Delete"
-              />
-            </>
-          )}
+            ))}
+          </FormGroup>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="secondary">
