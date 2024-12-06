@@ -74,7 +74,7 @@ const RoleTable: React.FC = () => {
     if (editRole) {
       try {
 
-        const response = await axios.put(`http://127.0.0.1:8000/role/${editRole.id}`, {
+        await axios.put(`http://127.0.0.1:8000/role/${editRole.id}`, {
           name: roleName, 
           permissions, 
         });
