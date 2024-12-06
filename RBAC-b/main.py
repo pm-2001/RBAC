@@ -8,7 +8,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://rbac-f-one.vercel.app",
+    "https://rbac-vp6p.vercel.app",
 ]
 
 app = FastAPI()
@@ -23,5 +23,5 @@ middleware = [
 ]
 app = FastAPI(middleware=middleware)
 # Include routers
-app.include_router(user_route.router, prefix="/users")
+app.include_router(user_route.router, prefix="/user")
 app.include_router(role_route.router, prefix="/role")
