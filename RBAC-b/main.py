@@ -24,5 +24,5 @@ middleware = [
 ]
 app = FastAPI(middleware=middleware)
 # Include routers
-app.include_router(user_route.router, prefix="/user")
+app.include_router(user_route.router, prefix="/u")
 app.include_router(role_route.router, prefix="/role")
