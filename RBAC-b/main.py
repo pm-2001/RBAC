@@ -8,6 +8,8 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:5173",
+    "https://rbac-frontend-woad.vercel.app",
+    "https://rbac-frontend-git-main-pm-2001s-projects.vercel.app/",
 ]
 
 app = FastAPI()
