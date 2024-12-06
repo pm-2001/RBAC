@@ -43,7 +43,7 @@ const RoleTable: React.FC = () => {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/role/');
+      const response = await axios.get('https://rbac-plx8.onrender.com/role/');
       setRoles(response.data);
     } catch (error: any) {
       setErrorMessage(error.response?.data?.detail || 'Failed to fetch roles.');
@@ -74,7 +74,7 @@ const RoleTable: React.FC = () => {
     if (editRole) {
       try {
 
-        await axios.put(`http://127.0.0.1:8000/role/${editRole.id}`, {
+        await axios.put(`https://rbac-plx8.onrender.com/role/${editRole.id}`, {
           name: roleName, 
           permissions, 
         });
@@ -92,7 +92,7 @@ const RoleTable: React.FC = () => {
 
   const handleDeleteClick = async (id: number) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/role/${id}`);
+      await axios.delete(`https://rbac-plx8.onrender.com/role/${id}`);
       setRoles((prevRoles) => prevRoles.filter((role) => role.id !== id));
     } catch (error: any) {
       setErrorMessage(error.response?.data?.detail || 'Failed to delete role.');

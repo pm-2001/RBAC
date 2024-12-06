@@ -15,7 +15,7 @@ const UserForm: React.FC = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/role/');
+        const response = await axios.get('https://rbac-plx8.onrender.com/role/');
         setRoles(response.data.map((role: any) => role.name)); 
         setLoadingRoles(false);
       } catch (error) {
@@ -30,7 +30,7 @@ const UserForm: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/user/', {
+      const response = await axios.post('https://rbac-plx8.onrender.com/user/', {
         username,
         email,
         role,

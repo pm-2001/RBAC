@@ -20,7 +20,7 @@ const RoleForm: React.FC = () => {
   const handleSubmit = async () => {
     try {
       console.log(permissions)
-      const response = await axios.post('http://127.0.0.1:8000/role/', {
+      const response = await axios.post('https://rbac-plx8.onrender.com/role/', {
         name: roleName,
         permissions,
       });

@@ -17,7 +17,7 @@ const UserTable: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/user/')
+      .get('https://rbac-plx8.onrender.com/user/')
       .then((response) => {
         setUsers(response.data);
         setLoading(false);
@@ -30,7 +30,7 @@ const UserTable: React.FC = () => {
 
   const toggleStatus = (id: number, currentStatus: boolean) => {
     axios
-      .put(`http://127.0.0.1:8000/user/${id}`, { status: !currentStatus })
+      .put(`https://rbac-plx8.onrender.com/user/${id}`, { status: !currentStatus })
       .then(() => {
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
